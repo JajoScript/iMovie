@@ -1,7 +1,8 @@
 import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 
 const screenOptions: NativeStackNavigationOptions = {
-  title: "Buscador 🔎",
+  title: "Buscador",
+  headerShown: false,
 }
 
 // Exportación 🐶.

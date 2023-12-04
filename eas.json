@@ -1,0 +1,21 @@
+{
+  "cli": {
+    "requireCommit": true
+  },
+  "build": {
+    "development": {
+      "channel": "development",
+      "developmentClient": true,
+      "distribution": "internal",
+      "node": "20.5.0",
+
+      "ios": {
+        "simulator": true
+      },
+      "android": {}
+    },
+
+    "preview": {},
+    "production": {}
+  }
+}

@@ -1,0 +1,13 @@
+# Dependencias.
+node_modules/
+package-lock.json
+yarn.lock
+
+# Compilaciones.
+.expo/
+
+# Editor
+.vscode/
+
+# Variables de entorno.
+.env

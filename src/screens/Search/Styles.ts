@@ -13,7 +13,9 @@ const global = StyleSheet.create({
   content: {
     backgroundColor: Colors.white_900,
 
-    minWidth: "90%",
+    width: "90%",
+    height: "90%",
+
     borderRadius: 5,
 
     paddingVertical: 5,

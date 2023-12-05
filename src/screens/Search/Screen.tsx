@@ -1,8 +1,9 @@
-import { View, Text, TextField, PageControl } from 'react-native-ui-lib';
+import { View, Text, TextField } from 'react-native-ui-lib';
 import { useState, useEffect } from 'react'
 import { useDeviceStyle } from '@/hooks/styles/'
 import { Movies } from './components/'
-import { APIResponse, Movie } from '@/types/api'
+import { searchMovies } from '@/api/'
+import { searchMoviesResponse, Movie } from '@/types/api'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Colors from '@/styles/colors'
 import GlobalStyles from './Styles';
@@ -13,9 +14,24 @@ function Screen(props: Props) {
   // 1. Manejo del estado.
   const Style = useDeviceStyle(GlobalStyles);
   const [search, setSearch] = useState("");
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   // 2. Ciclo de vida.
-  useEffect(() => { }, [search])
+  useEffect(() => {
+    // Filtro para buscar películas.
+    if (search.length < 3) {
+      return;
+    }
+
+    // Busqueda de las películas.
+    searchMovies(search)
+      .then((result: searchMoviesResponse) => {
+        // console.log("🐶 result: ", result)
+        setMovies(result.Search)
+      })
+      .catch((error) => { })
+
+  }, [search])
 
   // 3. Metodos.
   // 4. Renderizado.
@@ -46,7 +62,7 @@ function Screen(props: Props) {
         />
 
         {/* Results */}
-        <Movies />
+        {search.length >= 3 && <Movies movies={movies} />}
       </View>
     </View>
   );
@@ -54,73 +70,3 @@ function Screen(props: Props) {
 
 // 🐶 Exportación.
 export default Screen;
-
-/*
-function Screen(props: Props) {
-  // 1. Manejo del estado.
-  const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
-  const API_URL = process.env.EXPO_PUBLIC_API_URL;
-  const Style = useDeviceStyle(GlobalStyles);
-  const [search, setSearch] = useState("");
-  const [total, setTotal] = useState(0);
-  const [movies, setMovies] = useState<Movie[]>([]);
-
-  // 2. Ciclo de vida.
-  useEffect(() => {
-    const searchMovies = async () => {
-      const result: APIResponse = await fetch(`${API_URL}?apikey=${API_KEY}&s=${search}`)
-        .then((response) => response.json())
-        .catch((error) => {
-          console.error("🐶 error: ", error)
-        })
-
-      console.log("🐶 result: ", result)
-      return result;
-    }
-
-    // Validación de la consulta para limitar las consultas innecesarias.
-    if (search.length >= 3) {
-      // FETCH MOVIE SEARCH
-      searchMovies().then((result) => {
-        setTotal(result.totalResults);
-        setMovies(result.Search);
-      })
-    } else {
-      setTotal(0);
-      setMovies([]);
-    }
-  }, [search])
-
-  // 3. Metodos.
-  const mappingMovies = () => {
-    if (movies.length === 0) {
-      return null;
-    }
-
-    return movies.map((movie: Movie) => {
-      return (
-        <MovieCard key={movie.imdbID} />
-      );
-    });
-  }
-
-  return (
-    <View style={Style.container} useSafeArea>
-      
-      <Text style={Style.title}>iMovies</Text>
-      <TextField
-        value={search}
-        placeholder="Nombre de la película..."
-
-        onChangeText={setSearch}
-        fieldStyle={Style.fieldStyle}
-      />
-
-      
-      {search.length >= 3 && <Text>Buscando: {search}</Text>}
-      {search.length >= 3 && <Text>Resultados: {total}</Text>}
-      {mappingMovies()}
-    </View>
-  );
-}
-*/

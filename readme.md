@@ -34,3 +34,9 @@ El proyecto y sus dependencias puede ser manejado tanto con NPM como con YARN. A
 
   $npm install
 ```
+
+Iniciar la aplicación
+
+```bash
+  $yarn run serve
+```

@@ -1,3 +1,8 @@
-import MovieCard from "./MovieCard/Component";
+import MovieCard from "./MovieCard/MovieCard";
+import Movies from "./Movies/Movies";
 
-export { MovieCard };
+// Exportación 🐶.
+export {
+  Movies,
+  MovieCard
+};

@@ -58,3 +58,9 @@ DEMO de iMovies permite a los usuarios experimentar de primera mano las funcione
 <div style="display:flex;justify-content:center;width:100%;">
   <img src="./.github/mockups/demo.gif" style="height:250px;" />
 </div>
+
+## Notas del desarrollador
+
+Para mantener una lista de películas favoritas accesible en toda la aplicación, fue necesaria la implementación de un gestor de estados global. Se optó por utilizar Zustand, el cual no presenta mucha complejidad y se integra rápidamente en proyectos de diversas escalas.
+
+Con el objetivo de desarrollar rápidamente las capacidades necesarias, se decidió no profundizar demasiado en un CRUD de favoritos, concentrándose únicamente en los componentes CREATE & READ.

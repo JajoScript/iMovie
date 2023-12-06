@@ -1,5 +1,6 @@
 import { View, Text, Button, TextField } from 'react-native-ui-lib'
 import { useState, useEffect } from 'react';
+import { useRouter } from 'expo-router'
 import { useDeviceStyle } from '@/hooks'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getMovies } from '@/api'
@@ -16,6 +17,7 @@ function Screen(props: Props) {
   const [movies, setMovies] = useState<Movie[]>([])
   const [loading, setLoading] = useState(false);
   const Style = useDeviceStyle(GlobalStyles);
+  const router = useRouter();
 
   // 2. Ciclo de vida.
   useEffect(() => {
@@ -37,7 +39,12 @@ function Screen(props: Props) {
   }, [search])
 
   // 3. Metodos.
-  const goToFavorite = () => { }
+  const goToFavorite = () => {
+    return router.push({
+      pathname: "favorites",
+      params: {}
+    })
+  }
 
   // 4. Renderizado.
   return (

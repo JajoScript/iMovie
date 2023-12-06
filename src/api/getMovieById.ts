@@ -15,6 +15,10 @@ async function getMovieById(movieId: string) {
           throw new APIError("Error al obtener la película mediante su ID");
         });
 
+      if (response.Response === "False") {
+        throw new APIError("Error al obtener la película mediante su ID");
+      }
+
       return resolve(response);
     } catch (err) {
       console.error(err);

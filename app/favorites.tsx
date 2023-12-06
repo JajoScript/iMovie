@@ -1,3 +1,5 @@
+import FavoriteScreen from '@/screens/Favorites/Screen';
+
 interface Props { }
 
 function FavoritesContainer(props: Props) {
@@ -5,7 +7,7 @@ function FavoritesContainer(props: Props) {
   // 2. Ciclo de vida.
   // 3. Metodos.
   // 4. Renderizado.
-  return null;
+  return <FavoriteScreen />;
 }
 
 

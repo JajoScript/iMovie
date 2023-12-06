@@ -1,23 +1,9 @@
-interface Movie {
-  Poster: string,
-  Title: string;
-  Type: string;
-  Year: string;
-  imdbID: string;
-}
-
-interface searchMoviesResponse {
-  Search: Movie[];
-  totalResults: number;
-  Response: string;
-}
-
 interface Ratings {
   Source: string;
   Value: string;
 }
 
-interface getMovieResponse {
+interface GetMovieById {
   Title: string;
   Year: string;
   Rated: string;
@@ -45,11 +31,9 @@ interface getMovieResponse {
   Response: string;
 }
 
+
 // Exportación 🐶.
 export type {
-  searchMoviesResponse,
-  getMovieResponse,
-
-  Movie,
+  GetMovieById,
   Ratings
 }

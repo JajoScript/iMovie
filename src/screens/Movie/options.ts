@@ -1,8 +1,7 @@
 import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
 
-const screenOptions: NativeStackNavigationOptions = {
-  title: "Película 🎬",
-}
+const screenOptions: NativeStackNavigationOptions = {}
+
 
 // Exportación 🐶.
 export default screenOptions;

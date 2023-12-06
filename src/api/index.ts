@@ -1,8 +1,9 @@
-import searchMovies from "./searchMovies";
+// Barrel 🛢.
+import getMovies from "./getMovies";
 import getMovieById from "./getMovieById";
 
 // Exportación 🐶.
 export {
-  searchMovies,
-  getMovieById
+  getMovieById,
+  getMovies
 }

@@ -4,66 +4,107 @@ import Colors from '@/styles/colors'
 //* -- Estilo General.
 const global = StyleSheet.create({
   container: {
+    backgroundColor: Colors.black_900,
+
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    backgroundColor: Colors.black_900
   },
-  content: {
-    backgroundColor: Colors.white_900,
 
-    width: "90%",
-    height: "90%",
+  //* -- Header.
+  header: {
+    flex: 0.3,
+  },
 
+  bannerLogo: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    columnGap: 10,
+
+    paddingVertical: 5
+  },
+  bl_logo: {
+    fontSize: 30,
+    color: Colors.red_800
+  },
+  bl_title: {
+    fontFamily: "Poppins-Bold",
+    fontSize: 20,
+    color: Colors.white_900,
+  },
+
+  bannerFav: {
+    marginVertical: 5,
+    marginHorizontal: 10,
+
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    rowGap: 5,
+
+    backgroundColor: Colors.white_50,
     borderRadius: 5,
-
     paddingVertical: 5,
     paddingHorizontal: 10,
   },
-
-  //* -- Header
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    columnGap: 5,
+  bf_title: {
+    fontFamily: "Poppins-Bold",
+    fontSize: 16,
+    color: Colors.black_900,
   },
-  logo: {
-    fontSize: 20,
-    color: Colors.red_900
-  },
-  title: {
-    fontFamily: 'Poppins-Bold',
-    fontSize: 20,
-    color: Colors.red_900
-  },
-
-  //* -- Search bar
-  textField: {
+  bf_subtitle: {
     fontFamily: "Poppins-Regular",
     fontSize: 12,
-    color: Colors.black_900
-  },
-  fieldStyle: {
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-
-    borderRadius: 5,
-    backgroundColor: Colors.black_50
-  },
-  labelStyle: {
-    fontFamily: "Poppins-Bold",
-    fontSize: 14,
     color: Colors.black_900,
 
-    paddingVertical: 4,
+    textAlign: "left",
   },
-  containerStyle: {
+  bf_btn: {
+    backgroundColor: Colors.red_800,
+    marginVertical: 5,
+  },
+  bf_btn_label: {
+    fontFamily: "Poppins-Bold",
+    fontSize: 12,
+    color: Colors.black_700,
+  },
+
+  searchBar: {
+    marginVertical: 5,
+    marginHorizontal: 10,
+
+    // backgroundColor: "red"
+  },
+  sb_textField: {
+    fontFamily: "Poppins-Regular",
+    fontSize: 12,
+    color: Colors.black_900,
+  },
+  sb_fieldStyle: {
     paddingVertical: 5,
     paddingHorizontal: 10,
-    marginVertical: 5,
 
     borderRadius: 5,
+    backgroundColor: Colors.white_900,
+  },
+  sb_labelStyle: {
+    fontFamily: "Poppins-Bold",
+    fontSize: 14,
+    color: Colors.white_900,
+    textAlign: "left",
+  },
+
+  //* -- Body.
+  body: {
+    flex: 0.7,
+
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: Colors.black_100,
+
+    marginVertical: 10,
+    marginHorizontal: 10,
   },
 })
 
@@ -81,6 +122,7 @@ const styles = {
   ios,
   android
 }
+
 
 // 🐶 Exportación.
 export default styles;

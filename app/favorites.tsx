@@ -1,11 +1,13 @@
-import { View, Text } from 'react-native-ui-lib';
-import Screen from '@/screens/Favorites/Screen'
-
 interface Props { }
 
 function FavoritesContainer(props: Props) {
-  return <Screen />
+  // 1. Manejo del estado.
+  // 2. Ciclo de vida.
+  // 3. Metodos.
+  // 4. Renderizado.
+  return null;
 }
 
-// 🐶 Exportación.
+
+// Exportación 🐶.
 export default FavoritesContainer;

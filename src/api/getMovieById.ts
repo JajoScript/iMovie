@@ -1,23 +1,28 @@
-import { getMovieResponse } from '@/types/api'
+import { GetMovieById } from '@/types/api/';
+import { APIError } from '@/errors/api';
+
+const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
 async function getMovieById(movieId: string) {
-  return new Promise<getMovieResponse>(async (resolve, reject) => {
+  return new Promise<GetMovieById>(async (resolve, reject) => {
     try {
-      const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
-      const API_URL = process.env.EXPO_PUBLIC_API_URL;
-
-      const response: getMovieResponse = await fetch(`${API_URL}?apikey=${API_KEY}&i=${movieId}&plot=full`)
-        .then((response) => response.json())
+      // Conseguir la pelicula mediante su ID.
+      const response: GetMovieById = await fetch(`${API_URL}?apikey=${API_KEY}&i=${movieId}&plot=full`)
+        .then((res) => res.json())
         .catch((err) => {
-          console.log("Error", err);
-          throw new Error(err);
-        })
+          console.error(err);
+          throw new APIError("Error al obtener la película mediante su ID");
+        });
 
       return resolve(response);
     } catch (err) {
+      console.error(err);
       return reject(err);
     }
-  });
-};
+  })
+}
 
+
+// Exportación 🐶.
 export default getMovieById;

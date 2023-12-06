@@ -1,72 +1,95 @@
-import { View, Text, TextField } from 'react-native-ui-lib';
-import { useState, useEffect } from 'react'
-import { useDeviceStyle } from '@/hooks/styles/'
-import { Movies } from './components/'
-import { searchMovies } from '@/api/'
-import { searchMoviesResponse, Movie } from '@/types/api'
+import { View, Text, Button, TextField } from 'react-native-ui-lib'
+import { useState, useEffect } from 'react';
+import { useDeviceStyle } from '@/hooks'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { getMovies } from '@/api'
+import { GetMovies, Movie } from '@/types/api'
+import { Movies } from './components'
 import Colors from '@/styles/colors'
 import GlobalStyles from './Styles';
 
-interface Props { }
+interface Props { };
 
 function Screen(props: Props) {
   // 1. Manejo del estado.
+  const [search, setSearch] = useState('');
+  const [movies, setMovies] = useState<Movie[]>([])
+  const [loading, setLoading] = useState(false);
   const Style = useDeviceStyle(GlobalStyles);
-  const [search, setSearch] = useState("");
-  const [movies, setMovies] = useState<Movie[]>([]);
 
   // 2. Ciclo de vida.
   useEffect(() => {
-    // Filtro para buscar películas.
     if (search.length < 3) {
-      return;
-    }
+      setMovies([]);
+      return
+    };
 
-    // Busqueda de las películas.
-    searchMovies(search)
-      .then((result: searchMoviesResponse) => {
-        // console.log("🐶 result: ", result)
-        setMovies(result.Search)
+    setLoading(true);
+    getMovies(search)
+      .then((res: GetMovies) => {
+        setMovies(res.Search);
+        setLoading(false);
       })
-      .catch((error) => { })
-
+      .catch((err) => {
+        setMovies([]);
+        setLoading(false);
+      })
   }, [search])
 
   // 3. Metodos.
+  const goToFavorite = () => { }
+
   // 4. Renderizado.
   return (
-    <View style={Style.container} useSafeArea>
-      <View style={Style.content}>
-        {/* Header */}
-        <View style={Style.header}>
-          <MaterialCommunityIcons name="movie-open" style={Style.logo} />
-          <Text style={Style.title}>iMovies</Text>
+    <View useSafeArea style={Style.container}>
+      {/* Hader & search */}
+      <View style={Style.header}>
+        {/* Banner logo */}
+        <View style={Style.bannerLogo}>
+          <MaterialCommunityIcons name='movie-open' style={Style.bl_logo} />
+          <Text style={Style.bl_title}>iMovies</Text>
         </View>
 
-        {/* Search */}
-        <TextField
-          label="Buscar"
+        {/* Banner favorites */}
+        <View style={Style.bannerFav}>
+          <Text style={Style.bf_title}>Mis favoritas</Text>
+          <Text style={Style.bf_subtitle}>Solo para ti! Guardamos especialmente tu impresionante gusto por las peliculas.</Text>
+          <Button
+            label='Ver mis favoritas'
+            onPress={goToFavorite}
+            style={Style.bf_btn}
+            labelStyle={Style.bf_btn_label}
+            size='xSmall'
+          />
+        </View>
 
-          value={search}
-          onChangeText={setSearch}
+        {/* Search bar */}
+        <View style={Style.searchBar}>
+          <TextField
+            value={search}
+            label='Buscar pelicula'
+            placeholder='Pulp Fiction'
+            onChangeText={setSearch}
 
-          style={Style.textField}
-          fieldStyle={Style.fieldStyle}
-          labelStyle={Style.labelStyle}
-          containerStyle={Style.containerStyle}
-          placeholderTextColor={Colors.white_100}
+            style={Style.sb_textField}
+            fieldStyle={Style.sb_fieldStyle}
+            labelStyle={Style.sb_labelStyle}
+            placeholderTextColor={Colors.black_50}
 
-          placeholder='Pulp Fiction'
-          floatingPlaceholder={false}
-        />
+            multiline={false}
+            floatingPlaceholder={false}
+          />
+        </View>
+      </View>
 
-        {/* Results */}
-        {search.length >= 3 && <Movies movies={movies} />}
+      {/* Movies */}
+      <View style={Style.body}>
+        <Movies loading={loading} movies={movies} search={search} />
       </View>
     </View>
   );
 }
 
-// 🐶 Exportación.
+
+// Exportación 🐶.
 export default Screen;

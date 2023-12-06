@@ -37,5 +37,6 @@ const Colors = {
   red_50: "#4C0606",
 }
 
+
 // Exportación 🐶.
 export default Colors;

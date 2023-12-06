@@ -1,6 +1,6 @@
-# iMovie
+# iMovies
 
-Aplicación para buscar información de películas utilizando la API pública de OMDB
+Este documento proporciona información detallada sobre la estructura y funcionalidad del proyecto iMovies, una aplicación de búsqueda y gestión de películas.
 
 ## 🔨 Requerimientos
 
@@ -40,3 +40,13 @@ Iniciar la aplicación
 ```bash
   $yarn run serve
 ```
+
+## Mockups
+
+A continuación, se presentan los mockups que visualizan la interfaz de usuario de la aplicación iMovies. Estos mockups ofrecen una representación gráfica de las tres pantallas principales: la pantalla de búsqueda, la pantalla de detalles de la película y la pantalla de favoritos. 
+
+<div style="display:flex; justify-content:center; align-items:center; width:100%">
+  <img src="./.github/mockups/search_screen.png" style="height:250px;"/>
+<img src="./.github/mockups/movie_screen.png" style="height:250px;"/>
+<img src="./.github/mockups/favorites_screen.png" style="height:250px;"/>
+</div>

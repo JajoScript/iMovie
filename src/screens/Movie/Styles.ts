@@ -15,6 +15,24 @@ const global = StyleSheet.create({
     backgroundColor: Colors.black_900,
   },
 
+  fav: {
+    width: 40,
+    height: 40,
+
+    borderRadius: 50,
+
+    position: "absolute",
+    right: 20,
+
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+
+    zIndex: 2,
+  },
+  star: {},
+
   image: {
     height: 200,
     width: '100%',

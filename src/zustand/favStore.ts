@@ -1,7 +1,9 @@
-interface FavStore {
-  favMovies: string[],
+import { GetMovieById } from '@/types/api'
 
-  addFavMovie: (movieId: string) => void,
+interface FavStore {
+  favMovies: GetMovieById[],
+
+  addFavMovie: (movieId: GetMovieById) => void,
 }
 
 

@@ -1,11 +1,11 @@
 import { View, Text, Image } from 'react-native-ui-lib';
 import { ScrollView } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from 'expo-router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ButtonFav } from '@/components/';
-import { useDeviceStyle } from '@/hooks';
-import { GetMovieById } from '@/types/api';
+import { useDeviceStyle, useIsFavMovie } from '@/hooks';
+import { GetMovieById, Movie } from '@/types/api';
 import { useFavStore, FavStore } from '@/zustand';
 import GlobalStyle from './Styles';
 
@@ -17,6 +17,7 @@ function Screen(props: Props) {
   // 1. Manejo del estado.
   const { movie } = props;
   const Style = useDeviceStyle(GlobalStyle);
+  const isFav = useIsFavMovie(movie?.imdbID || '');
   const navigation = useNavigation();
   const state: FavStore = useFavStore();
 
@@ -28,10 +29,12 @@ function Screen(props: Props) {
   }, [movie])
 
   // 3. Metodos.
+  console.log("state", state)
   const handleFav = () => {
     if (!movie) return;
 
-    state.addFavMovie(movie.imdbID);
+    // Adapter.
+    state.addFavMovie(movie);
   };
 
   const renderImage = () => {
@@ -39,10 +42,6 @@ function Screen(props: Props) {
       return (
         <View style={Style.missing}>
           <Image source={{ uri: movie?.Poster }} style={Style.poster} />
-
-          <View style={Style.m_btn} >
-            <ButtonFav onPress={handleFav} />
-          </View>
         </View>
       );
     }
@@ -50,19 +49,28 @@ function Screen(props: Props) {
     return (
       <View style={Style.missing}>
         <MaterialCommunityIcons name="movie-roll" style={Style.m_logo} />
-
-        <View style={Style.m_btn} >
-          <ButtonFav onPress={handleFav} />
-        </View>
       </View>
     )
   };
 
+  const renderFavorite = () => {
+    return (
+      <ButtonFav
+        onPress={handleFav}
+        isFav={isFav}
+      />
+    )
+  }
 
   // 4. Renderizado.
   return (
     <View style={Style.container} useSafeArea>
       <ScrollView style={Style.scroll}>
+        {/* Favorite */}
+        <View style={Style.fav}>
+          {renderFavorite()}
+        </View>
+
         {/* Poster */}
         <View style={Style.image}>
           {renderImage()}

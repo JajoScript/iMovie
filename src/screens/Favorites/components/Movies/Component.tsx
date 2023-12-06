@@ -22,7 +22,7 @@ function Movies(props: Props) {
     return (
       <View style={Style.void}>
         <MaterialCommunityIcons name="movie-open-remove" style={Style.v_logo} />
-        <Text style={Style.v_title}>{`No se encontraron peliculas :(`}</Text>
+        <Text style={Style.v_title}>{`Aún no agregas peliculas a favoritos`}</Text>
       </View>
     )
   }
